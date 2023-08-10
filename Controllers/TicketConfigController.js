@@ -74,9 +74,21 @@ const updateTicketConfig = expressHandler(async (req, res) => {
   }
 });
 
+const deleteOneTicketConfig = expressHandler(async (req, res) => {
+  const ticketConfig = await TicketConfig.findByIdAndDelete(req.params.id);
+
+  if (!ticketConfig) {
+    res.status(500).json({ message: "Internal server error" });
+    res.status(404).json({ message: "Ticket not found" });
+  } else {
+    res.status(200).json({ message: "Ticket delete successfully!" });
+  }
+});
+
 module.exports = {
   postTicketConfig,
   getTicketConfig,
   updateTicketConfig,
   getOneTicketConfig,
+  deleteOneTicketConfig,
 };
