@@ -12,9 +12,9 @@ const ticketConfigSchema = new mongoose.Schema({
   extraInformation: { type: String },
   seats: { type: Number },
   coachType: { type: String },
-  passengers: [],
+  passengers: { type: Array },
 });
 
 const ticketConfig = mongoose.model("TicketConfig", ticketConfigSchema);
 
-export default ticketConfig;
+module.exports = ticketConfig;

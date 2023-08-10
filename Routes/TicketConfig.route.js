@@ -1,6 +1,12 @@
 const express = require("express");
-import { postTicketConfig } from "../Controllers/TicketConfigController";
+// import { postTicketConfig } from "../Controllers/TicketConfigController";
+const {
+  postTicketConfig,
+  getTicketConfig,
+} = require("../Controllers/TicketConfigController.js");
 
 const ticketConfigRoute = express.Router();
-ticketConfigRoute.route("/admin/config").post(postTicketConfig);
-export { ticketConfigRoute };
+ticketConfigRoute.route("/").post(postTicketConfig).get(getTicketConfig);
+
+
+module.exports = { ticketConfigRoute };

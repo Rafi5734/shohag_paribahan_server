@@ -22,4 +22,16 @@ const postTicketConfig = expressHandler(async (req, res) => {
   }
   res.status(200).json(ticketConfig);
 });
-export { postTicketConfig };
+
+
+const getTicketConfig = expressHandler(async (req, res) => {
+  const ticketConfig = await TicketConfig.find();
+
+  if (!ticketConfig) {
+    res.status(500).json({ message: "TicketConfig internal server error" });
+    res.status(404).json({ message: "TicketConfig list not found" });
+  }
+  res.status(200).json(ticketConfig);
+});
+
+module.exports = { postTicketConfig, getTicketConfig };
