@@ -85,10 +85,41 @@ const deleteOneTicketConfig = expressHandler(async (req, res) => {
   }
 });
 
+
+const filterTicket = expressHandler(async (req, res, next) => {
+  try {
+    const { from, to, journeyDate, coachType } = req.query;
+
+    const filteredData = data.filter((item) => {
+      switch (true) {
+        case from && item.from !== from:
+        case to && item.to !== to:
+        case journeyDate && item.journeyDate !== journeyDate:
+        case coachType && item.coachType !== coachType:
+          return false;
+        default:
+          return true;
+      }
+    });
+
+    res.status(200).json(filteredData);
+    res.setHeader("Content-Type", "application/json");
+
+    // if (!filteredData) {
+    //   res.status(500).json({ message: "Ticket config internal server error" });
+    //   res.status(404).json({ message: "Filter Ticket list not found" });
+    // }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
 module.exports = {
   postTicketConfig,
   getTicketConfig,
   updateTicketConfig,
   getOneTicketConfig,
   deleteOneTicketConfig,
+  filterTicket,
 };

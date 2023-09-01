@@ -6,6 +6,7 @@ const {
   updateTicketConfig,
   getOneTicketConfig,
   deleteOneTicketConfig,
+  filterTicket,
 } = require("../Controllers/TicketConfigController.js");
 
 const ticketConfigRoute = express.Router();
@@ -15,6 +16,8 @@ ticketConfigRoute
   .put(updateTicketConfig)
   .get(getOneTicketConfig)
   .delete(deleteOneTicketConfig);
+
+ticketConfigRoute.route("/filter_ticket").get(filterTicket);
 
 
 module.exports = { ticketConfigRoute };
