@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ticketConfigSchema = new mongoose.Schema({
-  _id: { type: String },
+  // _id: { type: String },
   from: { type: String },
   to: { type: String },
   journeyDate: { type: String },

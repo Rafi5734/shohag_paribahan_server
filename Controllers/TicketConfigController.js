@@ -41,7 +41,7 @@ const getOneTicketConfig = expressHandler(async (req, res) => {
     res.status(500).json({ message: "TicketConfig internal server error" });
     res.status(404).json({ message: "TicketConfig list not founded" });
   }
-  res.status(200).json(ticketConfig);
+  return res.status(200).json(ticketConfig);
 });
 
 const updateTicketConfig = expressHandler(async (req, res) => {
@@ -85,35 +85,34 @@ const deleteOneTicketConfig = expressHandler(async (req, res) => {
   }
 });
 
+// const filterTicket = expressHandler(async (req, res, next) => {
+//   try {
+//     const { from, to, journeyDate, coachType } = req.query;
 
-const filterTicket = expressHandler(async (req, res, next) => {
-  try {
-    const { from, to, journeyDate, coachType } = req.query;
+//     const filteredData = data.filter((item) => {
+//       switch (true) {
+//         case from && item.from !== from:
+//         case to && item.to !== to:
+//         case journeyDate && item.journeyDate !== journeyDate:
+//         case coachType && item.coachType !== coachType:
+//           return false;
+//         default:
+//           return true;
+//       }
+//     });
 
-    const filteredData = data.filter((item) => {
-      switch (true) {
-        case from && item.from !== from:
-        case to && item.to !== to:
-        case journeyDate && item.journeyDate !== journeyDate:
-        case coachType && item.coachType !== coachType:
-          return false;
-        default:
-          return true;
-      }
-    });
+//     res.status(200).json(filteredData);
+//     res.setHeader("Content-Type", "application/json");
 
-    res.status(200).json(filteredData);
-    res.setHeader("Content-Type", "application/json");
-
-    // if (!filteredData) {
-    //   res.status(500).json({ message: "Ticket config internal server error" });
-    //   res.status(404).json({ message: "Filter Ticket list not found" });
-    // }
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-});
+//     // if (!filteredData) {
+//     //   res.status(500).json({ message: "Ticket config internal server error" });
+//     //   res.status(404).json({ message: "Filter Ticket list not found" });
+//     // }
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+// });
 
 module.exports = {
   postTicketConfig,
@@ -121,5 +120,5 @@ module.exports = {
   updateTicketConfig,
   getOneTicketConfig,
   deleteOneTicketConfig,
-  filterTicket,
+  // filterTicket,
 };
